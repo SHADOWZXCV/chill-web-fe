@@ -1,0 +1,8 @@
+node_modules
+bower_components
+components/*
+css
+!components/Home
+!components/Router
+!components/App.js
+controller
