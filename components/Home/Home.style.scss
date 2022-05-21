@@ -6,6 +6,24 @@ $human4: url("../../static/Home/human4.jpg");
 $unknown: url("../../static/Home/icon-unknown.png");
 $marked: url("../../static/Home/icon-marked.png");
 
+@keyframes change_bg {
+    from {  background: url("../../static/Home/dashboard.png") no-repeat; background-size: cover; }
+    to { background: url("../../static/Home/dashboard_dark.png") no-repeat; background-size: cover; }
+}
+
+@keyframes change_margin_top {
+    from {  margin-top: 2em; }
+    to { margin-top: 0; }
+}
+
+@mixin mobile {
+    @media (max-width: 810px) { @content; }
+}
+
+@mixin desktop {
+    @media (min-width: 810px) { @content; }
+}
+
 body {
     font-family: 'NexaRegular ☞';
     overflow-x: hidden;
@@ -21,35 +39,60 @@ p {
 hr {
     border: solid 1px #00000016;
     width: 50%;
-}
-.Horizontal {
-    &-sb {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-}
+    margin-left: 0;
 
-.Vertical {
-    display: flex;
-    flex-direction: column;
+    @include mobile{
+        display: none;
+    }
 }
 
 .Home {
     &-Main {
         display: flex;
-        justify-content: space-between;
+
+        @include mobile {
+            flex-direction: column;
+            align-items: center;
+        }
     }
 
     &-content {
+        @include mobile {
+            width: 90%;
+            margin: 0;
+            margin-bottom: 5em;
+        }
+
+        &-comments-ul {
+            @include mobile {
+                list-style: none;
+                font-size: small;
+                padding: 0;
+            }
+        }
+
         margin: 2em 0 0 5em;
+        width: 60%;
+
+        p {
+            margin: 0;
+        }
         h2 {
             font-weight: lighter;
             #bold-span {
-                font-family: 'NexaHeavy ☞';
+                font-family: 'Nexa Heavy';
+            }
+
+            @include mobile {
+                margin: 2em 0 2em 0;
             }
         }
         &-btns {
+
+            @include mobile {
+                flex-direction: row;
+                font-size: x-small;
+            }
             display: flex;
             flex-direction: column;
             margin-top: 2em;
@@ -61,275 +104,115 @@ hr {
                 padding: 1em;
                 width: 10em;
                 text-align: center;
-                font-family: 'NexaHeavy ☞';
+                font-family: 'Nexa Heavy';
                 border-radius: 10px;
 
+                @include mobile{
+                    width: unset;
+                    padding: 0 1em 0 1em;
+                }
             }
             #try-out-btn {
                 color: #3E8EDC;
                 border: solid 3px #3E8EDC;
 
+                @include mobile {
+                    border: none;
+                    margin: 0;
+                }
+
                 &:hover {
-                    color: #25629e;
-                    border: solid 3px #25629e;
-                    transition: all 0.1s;
+                    @include desktop{
+                        color: #25629e;
+                        border: solid 3px #25629e;
+                        transition: all 0.1s;
+                    }
                 }
             }
 
             #features-btn {
                 background: #3E8EDC;
                 width: 10.5em;
+
+                @include mobile {
+                    background: none;
+                    color: #3E8EDC;
+                    margin: 0;
+                    width: unset;
+                }
+
                 &:hover {
-                    background: #25629e;
-                    transition: all 0.2s;
+                    @include desktop{
+                        background: #25629e;
+                        transition: all 0.2s;
+                    }
                 }
             }
         }
     }
 
     &-SideImage {
-        width: 45%;
+        width: 40%;
         height: 40em;
         margin: 2em 0 0 0;
         display: flex;
         flex-direction: column;
-        box-shadow: -6px 3px 60px #00000016;
-        border-radius: 40px;
-        position: relative;
-        right: -4em;
-         &-Blur {
-             height: 50%;
-             width: 5em;
-             background-image: linear-gradient(90deg, #ffffff98, transparent);
-             position: absolute;
-             right: -2px;
-             top: 10em;
-             z-index: 11;
-         }
+        box-shadow: -6px 3px 60px #00000027;
+        border-radius: 40px 0 0 40px;
+        position: absolute;
+        right: 0;
+        background: url("../../static/Home/dashboard.png") no-repeat;
+        background-size: cover;
+        transition: 0.5s;
+        @include mobile {
+            position: relative;
+            border-radius: 20px;
+        }
+    }
+
+    &-SideImage:hover {
+        @include desktop{
+            width: 74%;
+            animation: change_bg 2s infinite alternate, change_margin_top 0.6s infinite alternate;
+        }
     }
 
     .Nav {
-        position: absolute;
-        margin: 1em 1.5em 0.5em 1.5em;
-        width: 11em;
+        width: 90vw;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        &-Circle {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: #F5F5F5;
-            border: solid 1px #707070;
-        }
-        &-Greeting {
-            font-family: 'Nexa ☞';
-            font-weight: 400;
-            font-size: 1em;
-        }
     }
 
-    .Dashboard {
+    .love-message {
         position: absolute;
-        top: 5em;
-        margin-left: 6em;
-        padding: 1em;
-        box-shadow: 0 0 3px #00000040;
-        border-radius: 1em;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        &-ProfilePic {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-        }
-
-        &-Indicator {
-            margin-left: 1em;
-            background: #3E8EDC;
-            height: 0.8em;
-            margin-bottom: 0.4em;
-
-            &-1{
-                width: 25em;
-            }
-            &-2{
-                width: 30em;
-            }
-            &-3{
-                width: 15em;
-            }
-        }
+        bottom: 2em;
     }
+
+    #chill-gang {
+        position: absolute;
+        bottom: 6em;
+        display: flex;
+        align-items: center;
+    }
+
+    #chill-message {
+        font-family: "Freestyle Script";
+        font-weight: bold;
+        font-size: larger;
+        margin-left: 10px;
+    }
+
+    
+    #chillGuy {
+        position: relative;
+        width: 64px;
+    }
+
     .Content {
-        position: absolute;
-        top: 11em;
-        &-VerticalWord {
-            position: absolute;
-            top: 250px;
-            left: 20px;
-            text-transform: uppercase;
-            transform-origin: 0 0;
-            transform: rotate(-90deg);
-            width: fit-content;
-            margin: 0;
-            font-size: larger;
-            font-family: 'NexaHeavy ☞';
-        }
+        @include mobile{
+            margin-top: 2em;
+            text-align: center;
+        }        
     }
-
-    .Table {
-        width: 19em;
-        &-Head {
-            font-family: 'NexaHeavy ☞';
-            text-transform: uppercase;
-            font-size: large;
-            margin-bottom: 1em;
-        }
-        &-Body {
-            box-shadow: 0 0 10px #00000020;
-            border-radius: 5%;
-            padding: 0.5em;
-        }
-        &-Memo {
-            margin-left: 1.5em;
-            font-family: 'NexaHeavy ☞';
-            margin-bottom: 0.6em;
-        }
-        &-Row {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 0.75em 0.5em;
-            padding-left: 1.2em;
-            border-bottom: solid 1px #70707020;
-            &-Details {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: flex-start;
-                font-family: Candara;
-                margin-left: 0.7em;
-                p {
-                    font-size: 9px !important;
-                    span {
-                        font-weight: bolder;
-                    }
-                }
-                * {
-                    width: 100%;
-                    text-align: start;
-                    margin: 0.5em 0 0 0;
-                }
-            }
-        }
-    }
-    .WorkTable {
-        position: absolute;
-        left: 100px;
-        &-Header {
-            padding: 0.5em 1em 0 1em;
-            text-transform: uppercase;
-            * {
-                font-size: 1em;
-                margin: 1px;
-            }
-            &-Pic {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                box-shadow: 0 0 5px;
-                object-fit: cover;
-            }
-            &-Name {
-                font-family: 'NexaHeavy ☞';
-            }
-
-        }
-        &-Row {
-            &-Pic1 {
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-                background: $human1 center center no-repeat;
-                background-size: cover;
-            }
-            &-Pic2 {
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-                background: $human2 center center no-repeat;
-                background-size: cover;
-            }
-            &-Pic3 {
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-                background: $human3 center center no-repeat;
-                background-size: cover;
-            }
-            &-Pic4 {
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-                background: $human4  center center no-repeat;
-                background-size: cover;
-            }
-        }
-    }
-    .StudyTable {
-        position: absolute;
-        left: 430px;
-
-        &-Memo {
-            text-transform: uppercase;
-        }
-
-        &-Section {
-            box-shadow: 0 0 5px #00000030;
-            border-radius: 5%;
-            padding: 0.5em;
-        }
-        &-Row {
-            &-Unknown {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #585858;
-                width: 30px;
-                height: 30px;
-                background: $unknown center center no-repeat;
-                background-size: contain;
-            }
-            &-Marked {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #006a00;
-                width: 30px;
-                height: 30px;
-                background: $marked center center no-repeat;
-                background-size: contain;
-            }
-        }
-        &-SpecialRow {            
-            &-SeeMore {
-                color: #707070;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                * {
-                    font-size: 0.6em;
-                    margin: 1em 0 0 0.5em !important;
-                }
-                span {
-                    margin-right: 0.5em;
-                    transform: rotate(90deg);
-                }
-            }
-        }
-    }
-
 }
