@@ -1,4 +1,3 @@
-$primary-text-color: #241030;
 $human1: url("../../static/Home/human1.jpg");
 $human2: url("../../static/Home/human2.jpg");
 $human3: url("../../static/Home/human3.jpg");
@@ -16,26 +15,6 @@ $marked: url("../../static/Home/icon-marked.png");
     to { margin-top: 0; }
 }
 
-@mixin mobile {
-    @media (max-width: 810px) { @content; }
-}
-
-@mixin desktop {
-    @media (min-width: 810px) { @content; }
-}
-
-body {
-    font-family: 'NexaRegular ☞';
-    overflow-x: hidden;
-}
-
-h1 { 
-    color: $primary-text-color;
-}
-p {
-    font-size: small;
-}
-
 hr {
     border: solid 1px #00000016;
     width: 50%;
@@ -49,7 +28,7 @@ hr {
 .Home {
     &-Main {
         display: flex;
-
+        // @include column;
         @include mobile {
             flex-direction: column;
             align-items: center;
@@ -64,10 +43,10 @@ hr {
         }
 
         &-comments-ul {
+            list-style: none;
+
             @include mobile {
-                list-style: none;
                 font-size: small;
-                padding: 0;
             }
         }
 
@@ -88,15 +67,16 @@ hr {
             }
         }
         &-btns {
-
             @include mobile {
                 flex-direction: row;
                 font-size: x-small;
             }
+
             display: flex;
             flex-direction: column;
             margin-top: 2em;
             margin-bottom: 2em;
+
             * {
                 margin: 1em;
                 text-decoration: none;
@@ -112,6 +92,7 @@ hr {
                     padding: 0 1em 0 1em;
                 }
             }
+
             #try-out-btn {
                 color: #3E8EDC;
                 border: solid 3px #3E8EDC;
@@ -187,6 +168,7 @@ hr {
     .love-message {
         position: absolute;
         bottom: 2em;
+        font-size: small;
     }
 
     #chill-gang {
@@ -210,6 +192,9 @@ hr {
     }
 
     .Content {
+        @include desktop{
+            width: 70%;
+        }
         @include mobile{
             margin-top: 2em;
             text-align: center;

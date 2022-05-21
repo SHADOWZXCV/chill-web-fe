@@ -19,7 +19,14 @@ module.exports = {
       },
       {
         test: /\.(css|module.css|s[ac]ss)$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ["style-loader", "css-loader",
+        {
+          loader: 'sass-loader',
+          options: {
+            additionalData: '@import "./style/_main.scss";',
+          }
+        }
+      ],
       },
       {
         test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg|webp)(\?[a-z0-9=.]+)?$/,

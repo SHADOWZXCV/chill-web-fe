@@ -8,7 +8,7 @@ export default class HomeComponent extends PureComponent {
     return (
       <div className="Nav">
           <h1>Chill</h1>
-          { this.renderButtons() }                  
+          { this.renderButtons() }                
       </div>
     );
   }
