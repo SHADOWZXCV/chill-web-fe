@@ -1,10 +1,3 @@
-$human1: url("../../static/Home/human1.jpg");
-$human2: url("../../static/Home/human2.jpg");
-$human3: url("../../static/Home/human3.jpg");
-$human4: url("../../static/Home/human4.jpg");
-$unknown: url("../../static/Home/icon-unknown.png");
-$marked: url("../../static/Home/icon-marked.png");
-
 @keyframes change_bg {
     from {  background: url("../../static/Home/dashboard.png") no-repeat; background-size: cover; }
     to { background: url("../../static/Home/dashboard_dark.png") no-repeat; background-size: cover; }
