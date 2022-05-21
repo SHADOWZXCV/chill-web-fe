@@ -2,9 +2,7 @@ import React, { PureComponent } from "react";
 import {isMobile} from 'react-device-detect';
 
 import "./Home.style.scss";
-import pfp from "../../static/Home/pfp.png";
-import mywork from "../../static/Home/mywork.jpg";
-
+import chillGuy from "../../static/home/sun.png";
 export default class HomeComponent extends PureComponent {
   renderNav() {
     return (
@@ -17,11 +15,12 @@ export default class HomeComponent extends PureComponent {
 
   renderComments() {
     return (
-      <div>
+      <div className="Content">
         <p>
           Combining multiple methods, multiple tools, & multiple APIs, this app
           will be your right hand to achieve success! 💪
         </p>
+        <br />
         <br />
         <hr />
         <br />
@@ -49,6 +48,17 @@ export default class HomeComponent extends PureComponent {
     );
   }
 
+  renderCoolImageWithLoveMessage(){
+    return(
+      <>
+        <div id="chill-gang">
+          <img id="chillGuy" src={chillGuy} />
+          <p id="chill-message">Come and chill with me..</p>
+        </div>
+        <p className="love-message">{"Made with ❤ , by a time manager, for time managers!"}</p>
+      </>
+    );
+  }
   render() {
     return (
       <div className="Home Home-Main">
@@ -62,14 +72,13 @@ export default class HomeComponent extends PureComponent {
             <span id="bold-span">all in one!</span>
           </h2>
           {this.renderComments()}
-          { isMobile ? null : this.renderButtons()}
-          { isMobile ? null : <p>{"Made with ❤ , by a time manager, for time managers!"}</p>}
+          { isMobile ? null : this.renderButtons() }
+          { isMobile ? null : <p>{"Made with ❤ , by a time manager, for time managers!"}</p> }
         </div>
-        { isMobile ? null : 
+        { isMobile ? this.renderCoolImageWithLoveMessage() : 
                 <div className="Home Home-SideImage">
                 </div>
           }
-        { !isMobile ? null : <p className="love-message">{"Made with ❤ , by a time manager, for time managers!"}</p>}
       </div>
     );
   }

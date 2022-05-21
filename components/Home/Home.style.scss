@@ -40,6 +40,10 @@ hr {
     border: solid 1px #00000016;
     width: 50%;
     margin-left: 0;
+
+    @include mobile{
+        display: none;
+    }
 }
 
 .Home {
@@ -78,6 +82,10 @@ hr {
             #bold-span {
                 font-family: 'Nexa Heavy';
             }
+
+            @include mobile {
+                margin: 2em 0 2em 0;
+            }
         }
         &-btns {
 
@@ -99,16 +107,19 @@ hr {
                 font-family: 'Nexa Heavy';
                 border-radius: 10px;
 
+                @include mobile{
+                    width: unset;
+                    padding: 0 1em 0 1em;
+                }
             }
             #try-out-btn {
+                color: #3E8EDC;
+                border: solid 3px #3E8EDC;
 
                 @include mobile {
                     border: none;
                     margin: 0;
-                    padding: 0;            
                 }
-                color: #3E8EDC;
-                border: solid 3px #3E8EDC;
 
                 &:hover {
                     @include desktop{
@@ -120,14 +131,15 @@ hr {
             }
 
             #features-btn {
+                background: #3E8EDC;
+                width: 10.5em;
+
                 @include mobile {
                     background: none;
                     color: #3E8EDC;
                     margin: 0;
-                    padding: 0;
+                    width: unset;
                 }
-                background: #3E8EDC;
-                width: 10.5em;
 
                 &:hover {
                     @include desktop{
@@ -175,5 +187,32 @@ hr {
     .love-message {
         position: absolute;
         bottom: 2em;
+    }
+
+    #chill-gang {
+        position: absolute;
+        bottom: 6em;
+        display: flex;
+        align-items: center;
+    }
+
+    #chill-message {
+        font-family: "Freestyle Script";
+        font-weight: bold;
+        font-size: larger;
+        margin-left: 10px;
+    }
+
+    
+    #chillGuy {
+        position: relative;
+        width: 64px;
+    }
+
+    .Content {
+        @include mobile{
+            margin-top: 2em;
+            text-align: center;
+        }        
     }
 }
