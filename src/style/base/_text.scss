@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Nexa Bold';
+    src: url("../../static/fonts/NexaDemo-Bold.woff") format("woff");
+}
+@font-face {
+    font-family: 'Nexa Light';
+    src: url("../../static/fonts/NexaDemo-Light.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Karla';
+    src: url("../../static/fonts/Karla-VariableFont_wght.ttf") format("truetype");
+}
+
+@import '../abstract/_abstract.scss';
+
+* {
+    color: $primary-text-color;
+}
+
+body {
+    font-family: 'Nexa Bold';
+}
+
+p {
+    font-family: Karla;
+    font-size: medium;
+}
+
+ul {
+    padding: 0;
+}

@@ -4,7 +4,7 @@
 }
 
 @keyframes change_margin_top {
-    from {  margin-top: 2em; }
+    from {  margin-top: 0.5em; }
     to { margin-top: 0; }
 }
 
@@ -52,7 +52,7 @@ hr {
         h2 {
             font-weight: lighter;
             #bold-span {
-                font-family: 'Nexa Heavy';
+                font-family: 'Nexa Bold';
             }
 
             @include mobile {
@@ -69,6 +69,7 @@ hr {
             flex-direction: column;
             margin-top: 2em;
             margin-bottom: 2em;
+            cursor: pointer;
 
             * {
                 margin: 1em;
@@ -77,7 +78,7 @@ hr {
                 padding: 1em;
                 width: 10em;
                 text-align: center;
-                font-family: 'Nexa Heavy';
+                font-family: 'Nexa Bold';
                 border-radius: 10px;
 
                 @include mobile{
@@ -138,6 +139,7 @@ hr {
         background: url("../../static/Home/dashboard.png") no-repeat;
         background-size: cover;
         transition: 0.5s;
+        animation: change_bg 5s infinite alternate;
         @include mobile {
             position: relative;
             border-radius: 20px;
@@ -147,7 +149,7 @@ hr {
     &-SideImage:hover {
         @include desktop{
             width: 74%;
-            animation: change_bg 2s infinite alternate, change_margin_top 0.6s infinite alternate;
+            animation: change_bg 5s infinite alternate, change_margin_top 0.6s infinite alternate;
         }
     }
 

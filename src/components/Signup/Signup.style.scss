@@ -1,0 +1,116 @@
+.Signup {
+    &-Container {
+        margin: 0 2em;
+    }
+}
+
+.Nav {
+    &-Signup {
+        h2 {
+            font-size: xx-large;
+        }
+    }
+}
+
+
+.Input-Signup:focus + .floating-ph{
+    color: #3E8EDC;
+    top: 16px;
+    font-size: 8px;
+}
+
+.Input-Signup:focus {
+    border: solid 2px #3E8EDC;
+    box-shadow: 2px 2px 0 1px #3E8EDC;
+    outline: none;
+}
+
+.Input-Signup-error:focus {
+    border: solid 2px #D9353A;
+    box-shadow: 2px 2px 0 1px #D9353A;
+    outline: none;
+}
+
+.Input-Signup-error:focus + .floating-ph{
+    color: $error-color;
+    top: 16px;
+    font-size: 8px;
+}
+
+.error {
+    color: $error-color;
+    font-size: small;
+    user-select: none;
+}
+
+.Input-Signup:not(:placeholder-shown):not(:focus) + .floating-ph,
+.Input-Signup-error:not(:placeholder-shown):not(:focus) + .floating-ph{
+    color: transparent;
+}
+
+.floating-ph {
+    position: absolute;
+    top: 28px;
+    left: 18px;
+    color: rgba(156, 156, 156, 0.742);
+    font-size: 13px;
+    z-index: -1;
+    transition: 0.2s ease;
+    user-select: none;
+}
+
+.input-group {
+    position: relative;
+    width: 27em;
+}
+
+.Form {
+    &-Signup {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        @include mobile {
+            width: auto;
+        }
+    }
+}
+
+.Input {
+    &-Signup, &-Signup-error {
+        width: 90%;
+        font-family: 'Nexa Light';
+        font-weight: bolder;
+        margin: 10px 0;
+        padding: 15px;
+        border: solid 2px rgba(156, 156, 156, 0.482);
+        border-radius: 10px;
+        background: transparent;
+        transition: 0.2s ease;
+    }
+}
+
+.Submit {
+    &-Signup, &-Signup-err{
+        width: 32em;
+        margin-top: 10px;
+        font-family: 'Nexa Bold';
+        border: none;
+        border-radius: 10px;
+        padding: 15px;
+        background: $primary-color;
+        color: white;
+        cursor: pointer;
+        &-err {
+            background: $error-color;
+        }
+    }
+}
+
+#showPassword {
+    position: absolute;
+    top: 28px;
+    right: 35px;
+    cursor: pointer;
+}
