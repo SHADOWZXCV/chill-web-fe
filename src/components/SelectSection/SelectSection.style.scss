@@ -1,0 +1,49 @@
+.sign-head {
+    margin-bottom: 10px;
+}
+
+#head-select {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+}
+
+.head-select-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em;
+}
+
+.head-select-item {
+    user-select: none;
+    cursor: pointer;
+}
+
+.head-select-separator {
+    align-self: center;
+    margin: 0;
+    margin-bottom: -15px;
+}
+
+.select-indicator, .select-indicator-off {
+    width: 40px;
+    height: 5px;
+    border-radius: 10px;
+    background: #3E8EDC;
+}
+
+.select-indicator-off {
+    opacity: 0;
+    background: #3E8EDC;
+    transition: 0.2s ease;
+}
+
+.head-select-item:hover + .select-indicator-off {
+    opacity: 1;
+}
+
+// TODO: ANIMATION
+// .body-select-group {
+//     opacity: 0.9;
+// }

@@ -1,0 +1,18 @@
+@mixin row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin mobile {
+    @media (max-width: 810px) { @content; }
+}
+
+@mixin desktop {
+    @media (min-width: 810px) { @content; }
+}
