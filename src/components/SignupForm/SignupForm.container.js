@@ -12,33 +12,37 @@ export class SignupForm extends PureComponent {
 
   state = {
     isLoading: false,
-    noConenction: false,
+    noConnection: false,
   };
 
   onSubmit(data) {
     const { handleSignup, setError } = this.props;
     this.setState({ isLoading: true });
-    handleSignup(data, (data) => {
+    handleSignup(data, (res) => {
       this.setState({ isLoading: false });
-      if (!data) {
-        this.setState({ noConenction: true });
+      if (!res) {
+        return this.setState({ noConnection: true });
       }
-      this.setState({ noConenction: false });
-      switch (data.status) {
+      console.log("res: ", res);
+      console.log("data: ", data);
+      this.setState({ noConnection: false });
+      switch (res.status) {
         case 405:
           setError(
             "email",
             {
               type: "exists",
-              message: data.body.error,
+              message: res.body.error,
             },
             { shouldFocus: true }
           );
           break;
         case 200:
-          history.push(
-            `/enter/validate?successfulSignup=${data.body.username}`
-          );
+          history.push({
+            pathname: `/enter/validate`,
+            search: `?username=${data.username}`,
+            state: { signupContext: { email: res.body.email } },
+          });
       }
     });
   }

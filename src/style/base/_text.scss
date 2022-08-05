@@ -1,21 +1,19 @@
 @font-face {
     font-family: 'Nexa Bold';
-    src: url("../../static/fonts/NexaDemo-Bold.woff") format("woff");
+    src: url("Static/fonts/NexaDemo-Bold.woff") format("woff");
 }
 @font-face {
     font-family: 'Nexa Light';
-    src: url("../../static/fonts/NexaDemo-Light.woff") format("woff");
+    src: url("Static/fonts/NexaDemo-Light.woff") format("woff");
 }
 
 @font-face {
     font-family: 'Karla';
-    src: url("../../static/fonts/Karla-VariableFont_wght.ttf") format("truetype");
+    src: url("Static/fonts/Karla-VariableFont_wght.ttf") format("truetype");
 }
 
-@import '../abstract/_abstract.scss';
-
 * {
-    color: $primary-text-color;
+    color: #241030;
 }
 
 body {

@@ -49,6 +49,7 @@
     "react-loading-icons": "^1.1.0",
     "react-router-dom": "^5.2.0",
     "react-spring": "^9.0.0",
-    "react-top-loading-bar": "^2.0.1"
+    "react-top-loading-bar": "^2.0.1",
+    "sass-resources-loader": "^2.2.5"
   }
 }

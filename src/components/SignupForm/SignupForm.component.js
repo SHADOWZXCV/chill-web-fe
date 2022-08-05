@@ -14,7 +14,7 @@ export class SignupForm extends PureComponent {
     getValues: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
-    noConenction: PropTypes.bool.isRequired,
+    noConnection: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -89,14 +89,31 @@ export class SignupForm extends PureComponent {
       getValues,
       onSubmit,
       isLoading,
-      noConenction,
+      noConnection,
     } = this.props;
-
     const { passwordShown } = this.state;
 
     return (
       <form id="signup-form" onSubmit={handleSubmit(onSubmit)}>
         <Loading isLoading={isLoading} />
+        {/* <InputType
+          name="password"
+          message="Enter password"
+          {...register("password", {
+            maxLength: 29,
+            minLength: 7,
+            pattern: /^[A-Za-z][A-Za-z0-9_]{6,28}$/,
+          })}
+          error={errors["password"]}
+          errors={{
+            pattern: `Password should have the following:
+            At least 1 lowercase character , at least 1
+            uppercase character, at least 1 number & 1 special character`,
+            minLength: `Password should have minLength
+                    of at least 8 characters!`,
+            maxLength: `Password should be at 20 characters max!`,
+          }}
+        /> */}
         <div className="input-group">
           <input
             type="text"
@@ -161,8 +178,8 @@ export class SignupForm extends PureComponent {
         </div>
         <input
           type="submit"
-          className={noConenction ? "Submit-Signup-err" : "Submit-Signup"}
-          value={noConenction ? "Can't connect, try again!" : "Signup"}
+          className={noConnection ? "Submit-Signup-err" : "Submit-Signup"}
+          value={noConnection ? "Can't connect, try again!" : "Signup"}
         />
       </form>
     );

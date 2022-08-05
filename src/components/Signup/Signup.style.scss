@@ -1,3 +1,6 @@
+@use 'Style/abstract/_abstract.scss' as *;
+@use 'Style/abstract/_mixins.scss' as *;
+
 .Signup {
     &-Container {
         margin: 0 2em;

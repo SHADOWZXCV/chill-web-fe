@@ -1,3 +1,5 @@
+@use 'Style/abstract/_mixins.scss' as *;
+
 @keyframes change_bg {
     from {  background: url("../../static/Home/dashboard.png") no-repeat; background-size: cover; }
     to { background: url("../../static/Home/dashboard_dark.png") no-repeat; background-size: cover; }
@@ -21,7 +23,6 @@ hr {
 .Home {
     &-Main {
         display: flex;
-        // @include column;
         @include mobile {
             flex-direction: column;
             align-items: center;
@@ -69,7 +70,6 @@ hr {
             flex-direction: column;
             margin-top: 2em;
             margin-bottom: 2em;
-            cursor: pointer;
 
             * {
                 margin: 1em;
@@ -80,6 +80,7 @@ hr {
                 text-align: center;
                 font-family: 'Nexa Bold';
                 border-radius: 10px;
+                cursor: pointer;
 
                 @include mobile{
                     width: unset;
@@ -136,7 +137,7 @@ hr {
         border-radius: 40px 0 0 40px;
         position: absolute;
         right: 0;
-        background: url("../../static/Home/dashboard.png") no-repeat;
+        background: url("Static/Home/dashboard.png") no-repeat;
         background-size: cover;
         transition: 0.5s;
         animation: change_bg 5s infinite alternate;
@@ -193,6 +194,6 @@ hr {
         @include mobile{
             margin-top: 2em;
             text-align: center;
-        }        
+        }
     }
 }

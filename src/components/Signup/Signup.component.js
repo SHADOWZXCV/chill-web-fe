@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import SelectSection from "../SelectSection/SelectSection.component";
 import SignupForm from "Components/SignupForm";
-import SigninForm from "../SigninForm/SigninForm.component";
+import SigninForm from "../SigninForm";
 
 import "./Signup.style.scss";
 

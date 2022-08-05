@@ -9,17 +9,18 @@ import "./SigninForm.style.scss";
 export class SigninForm extends PureComponent {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
-    handleSignin: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     register: PropTypes.func.isRequired,
     formState: PropTypes.any,
     errors: PropTypes.object,
     getValues: PropTypes.func.isRequired,
     setError: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    noConnection: PropTypes.bool.isRequired,
   };
 
   state = {
     passwordShown: false,
-    isLoading: false,
   };
 
   showErr(errType, errors) {
@@ -77,35 +78,16 @@ export class SigninForm extends PureComponent {
       handleSubmit,
       register,
       formState: { errors },
-      handleSignin,
+      onSubmit,
       getValues,
-      setError,
+      isLoading,
+      noConnection,
     } = this.props;
 
-    const { passwordShown, isLoading } = this.state;
+    const { passwordShown } = this.state;
 
     return (
-      <form
-        id="signin-form"
-        onSubmit={handleSubmit((data) => {
-          this.setState({ isLoading: true });
-          handleSignin(data, (data) => {
-            this.setState({ isLoading: false });
-            switch (data.status) {
-              case 404:
-                setError(
-                  "username",
-                  {
-                    type: "notFound",
-                    message: "This user is not found, maybe a typo ?",
-                  },
-                  { shouldFocus: true }
-                );
-                break;
-            }
-          });
-        })}
-      >
+      <form id="signin-form" onSubmit={handleSubmit(onSubmit)}>
         <Loading isLoading={isLoading} />
         <div className="input-group">
           <input
@@ -156,7 +138,11 @@ export class SigninForm extends PureComponent {
           </span>
           {this.showErr("password", errors)}
         </div>
-        <input type="submit" className="Submit-Signup" value="Signin" />
+        <input
+          type="submit"
+          className={noConnection ? "Submit-Signup-err" : "Submit-Signup"}
+          value={noConnection ? "Can't connect, try again!" : "Signin"}
+        />
       </form>
     );
   }

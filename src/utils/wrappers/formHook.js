@@ -8,3 +8,10 @@ export const withFormHook = (Component) => (props) => {
   });
   return <Component {...props} {...form} />;
 };
+
+export const withControllerHook = (Component) => (props) => {
+  const form = useForm({
+    mode: "onChange",
+  });
+  return <Component {...props} {...form} />;
+};

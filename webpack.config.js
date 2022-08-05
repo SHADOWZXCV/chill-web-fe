@@ -24,9 +24,10 @@ module.exports = {
           "css-loader",
           {
             loader: "sass-loader",
-            options: {
-              additionalData: '@import "Style/_main.scss";',
-            },
+            // loads lines with each sass file loaded:
+            // options: {
+            //   additionalData: '@use "Style/_main.scss" as *;',
+            // },
           },
         ],
       },
@@ -49,6 +50,7 @@ module.exports = {
     alias: {
       Components: path.resolve(__dirname, "src/components/"),
       Style: path.resolve(__dirname, "src/style/"),
+      Static: path.resolve(__dirname, "src/static/"),
     },
   },
 };
