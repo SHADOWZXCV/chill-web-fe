@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "Style/main.scss";
 
-// hand-made components
-import App from "./components/App";
-// import getCookie from "./controller/cookie";
+import App from "Components/App";
 
 ReactDOM.render(<App />, document.getElementById("root"));

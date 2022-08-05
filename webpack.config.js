@@ -1,5 +1,5 @@
 const path = require("path");
-const htmlWPP = require("html-webpack-plugin");
+const htmlWebpack = require("html-webpack-plugin");
 
 module.exports = {
   entry: path.resolve(__dirname, "index.js"),
@@ -19,7 +19,17 @@ module.exports = {
       },
       {
         test: /\.(css|module.css|s[ac]ss)$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            // loads lines with each sass file loaded:
+            // options: {
+            //   additionalData: '@use "Style/_main.scss" as *;',
+            // },
+          },
+        ],
       },
       {
         test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg|webp)(\?[a-z0-9=.]+)?$/,
@@ -31,9 +41,16 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
-    new htmlWPP({
+    new htmlWebpack({
       template: path.resolve(__dirname, "views/index.html"),
     }),
   ],
   devtool: "eval-source-map",
+  resolve: {
+    alias: {
+      Components: path.resolve(__dirname, "src/components/"),
+      Style: path.resolve(__dirname, "src/style/"),
+      Static: path.resolve(__dirname, "src/static/"),
+    },
+  },
 };

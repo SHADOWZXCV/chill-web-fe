@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Nexa Bold';
+    src: url("Static/fonts/NexaDemo-Bold.woff") format("woff");
+}
+@font-face {
+    font-family: 'Nexa Light';
+    src: url("Static/fonts/NexaDemo-Light.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Karla';
+    src: url("Static/fonts/Karla-VariableFont_wght.ttf") format("truetype");
+}
+
+* {
+    color: #241030;
+}
+
+body {
+    font-family: 'Nexa Bold';
+}
+
+p {
+    font-family: Karla;
+    font-size: medium;
+}
+
+ul {
+    padding: 0;
+}

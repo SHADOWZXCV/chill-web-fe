@@ -1,0 +1,101 @@
+/* eslint-disable react/prop-types */
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+// import InputType from "../Inputs/InputType_FIX_IT/InputType.component";
+// import SubmitButton from "../Inputs/SubmitButton/SubmitButton.component";
+
+export class SignupEmailValidate extends PureComponent {
+  static propTypes = {
+    // register: PropTypes.func.isRequired,
+    // handleSubmit: PropTypes.func.isRequired,
+    // validateToken: PropTypes.func.isRequired,
+    isSuccessfulSignup: PropTypes.bool.isRequired,
+    isValidated: PropTypes.bool.isRequired,
+    email: PropTypes.string.isRequired,
+  };
+
+  state = {
+    noConnection: false,
+  };
+
+  renderPartialMail() {
+    const {
+      location: { state },
+    } = this.props;
+    if (state) {
+      const {
+        signupContext: { email },
+      } = state;
+      return email.replace(/(\w{2})[\w.-]+@([\w.]+\w)/, "$1*****@$2");
+    }
+
+    const { location } = this.props;
+    const searchQueryParams = new URLSearchParams(location.search);
+    const email = searchQueryParams.get("email");
+    const partialMail = email.replace(
+      /(\w{2})[\w.-]+@([\w.]+\w)/,
+      "$1*****@$2"
+    );
+
+    return partialMail;
+  }
+
+  renderSuccessfulSignup() {
+    return (
+      <>
+        <h1>Your email verification is on its way!</h1>
+        <p>
+          Check out your email&apos;s inbox, click the link to verify the email
+          address: {this.renderPartialMail()}
+        </p>
+      </>
+    );
+  }
+
+  renderEmailValidated() {
+    return (
+      <>
+        <h1>Successful validation!</h1>
+        <p>Your email: {this.renderPartialMail()} is validated.</p>
+        <p>redirecting...</p>
+      </>
+    );
+  }
+
+  renderNotValidated() {
+    return (
+      <>
+        <h1>Expired validation!</h1>
+        <p>
+          The token seems to be either expired or wrong, please contact the
+          developer to check what went wrong!
+        </p>
+      </>
+    );
+  }
+
+  render() {
+    // const { register, handleSubmit, validateToken } = this.props;
+    // const { noConnection } = this.state;
+    const { isSuccessfulSignup, isValidated } = this.props;
+    return (
+      <div className="PerfectCenterChildren">
+        {isSuccessfulSignup
+          ? this.renderSuccessfulSignup()
+          : isValidated
+          ? this.renderEmailValidated()
+          : this.renderNotValidated()}
+      </div>
+      // <form onSubmit={handleSubmit(validateToken)}>
+      //   <InputType
+      //     name="token"
+      //     register={register}
+      //     placeholder="Enter validation code"
+      //   />
+      //   <SubmitButton value="validate" noConnection={noConnection} />
+      // </form>
+    );
+  }
+}
+
+export default SignupEmailValidate;

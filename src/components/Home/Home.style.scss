@@ -1,10 +1,4 @@
-$primary-text-color: #241030;
-$human1: url("../../static/Home/human1.jpg");
-$human2: url("../../static/Home/human2.jpg");
-$human3: url("../../static/Home/human3.jpg");
-$human4: url("../../static/Home/human4.jpg");
-$unknown: url("../../static/Home/icon-unknown.png");
-$marked: url("../../static/Home/icon-marked.png");
+@use 'Style/abstract/_mixins.scss' as *;
 
 @keyframes change_bg {
     from {  background: url("../../static/Home/dashboard.png") no-repeat; background-size: cover; }
@@ -12,28 +6,8 @@ $marked: url("../../static/Home/icon-marked.png");
 }
 
 @keyframes change_margin_top {
-    from {  margin-top: 2em; }
+    from {  margin-top: 0.5em; }
     to { margin-top: 0; }
-}
-
-@mixin mobile {
-    @media (max-width: 810px) { @content; }
-}
-
-@mixin desktop {
-    @media (min-width: 810px) { @content; }
-}
-
-body {
-    font-family: 'NexaRegular ☞';
-    overflow-x: hidden;
-}
-
-h1 { 
-    color: $primary-text-color;
-}
-p {
-    font-size: small;
 }
 
 hr {
@@ -49,7 +23,6 @@ hr {
 .Home {
     &-Main {
         display: flex;
-
         @include mobile {
             flex-direction: column;
             align-items: center;
@@ -64,10 +37,10 @@ hr {
         }
 
         &-comments-ul {
+            list-style: none;
+
             @include mobile {
-                list-style: none;
                 font-size: small;
-                padding: 0;
             }
         }
 
@@ -80,7 +53,7 @@ hr {
         h2 {
             font-weight: lighter;
             #bold-span {
-                font-family: 'Nexa Heavy';
+                font-family: 'Nexa Bold';
             }
 
             @include mobile {
@@ -88,15 +61,16 @@ hr {
             }
         }
         &-btns {
-
             @include mobile {
                 flex-direction: row;
                 font-size: x-small;
             }
+
             display: flex;
             flex-direction: column;
             margin-top: 2em;
             margin-bottom: 2em;
+
             * {
                 margin: 1em;
                 text-decoration: none;
@@ -104,14 +78,16 @@ hr {
                 padding: 1em;
                 width: 10em;
                 text-align: center;
-                font-family: 'Nexa Heavy';
+                font-family: 'Nexa Bold';
                 border-radius: 10px;
+                cursor: pointer;
 
                 @include mobile{
                     width: unset;
                     padding: 0 1em 0 1em;
                 }
             }
+
             #try-out-btn {
                 color: #3E8EDC;
                 border: solid 3px #3E8EDC;
@@ -161,9 +137,10 @@ hr {
         border-radius: 40px 0 0 40px;
         position: absolute;
         right: 0;
-        background: url("../../static/Home/dashboard.png") no-repeat;
+        background: url("Static/Home/dashboard.png") no-repeat;
         background-size: cover;
         transition: 0.5s;
+        animation: change_bg 5s infinite alternate;
         @include mobile {
             position: relative;
             border-radius: 20px;
@@ -173,7 +150,7 @@ hr {
     &-SideImage:hover {
         @include desktop{
             width: 74%;
-            animation: change_bg 2s infinite alternate, change_margin_top 0.6s infinite alternate;
+            animation: change_bg 5s infinite alternate, change_margin_top 0.6s infinite alternate;
         }
     }
 
@@ -187,6 +164,7 @@ hr {
     .love-message {
         position: absolute;
         bottom: 2em;
+        font-size: small;
     }
 
     #chill-gang {
@@ -210,9 +188,12 @@ hr {
     }
 
     .Content {
+        @include desktop{
+            width: 70%;
+        }
         @include mobile{
             margin-top: 2em;
             text-align: center;
-        }        
+        }
     }
 }
