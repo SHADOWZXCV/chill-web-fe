@@ -14,13 +14,19 @@ export default class RouterComponent extends PureComponent {
       <Switch>
         <Suspense fallback={<Loading isLoading={true} />}>
           {Object.keys(RouteComponentList).map((path, index) => {
-            const RouteComponent = RouteComponentList[path];
+            const { RouteComponent, isProtected } = RouteComponentList[path];
+            const protectiveProps = {};
+
+            if (isProtected) protectiveProps.isProtected = isProtected;
+
             return (
               <Route
                 key={index}
                 path={path}
                 exact
-                render={(props) => <RouteComponent {...props} />}
+                render={(componentProps) => (
+                  <RouteComponent {...componentProps} {...protectiveProps} />
+                )}
               />
             );
           })}

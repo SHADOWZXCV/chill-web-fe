@@ -4,7 +4,7 @@ import RouterComponent from "./Router.component";
 
 import RoutesList from "../../routes/RoutesList/RoutesList";
 import { Router } from "react-router-dom";
-import history from "../../utils/History";
+import history from "Utils/History";
 
 export class RouterContainer extends PureComponent {
   static propTypes = {

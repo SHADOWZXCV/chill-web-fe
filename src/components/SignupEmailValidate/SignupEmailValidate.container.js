@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
-import SignupEmailValidateComponent from "./SignupEmailValidate.component";
-import Loading from "../Loading/Loading.component";
-import { withFormHook } from "../../utils/wrappers/formHook";
 import PropTypes from "prop-types";
+import { withFormHook } from "Utils/wrappers/formHook";
+import { prepareUserEntrance } from "Utils/isSignedIn";
+import SignupEmailValidateComponent from "./SignupEmailValidate.component";
+import Loading from "Components/Loading/Loading.component";
 
 export class SignupEmailValidate extends PureComponent {
   static propTypes = {
@@ -26,10 +27,8 @@ export class SignupEmailValidate extends PureComponent {
     const emailParam = searchQueryParams.get("email");
     const nameParam = searchQueryParams.get("username");
     if (tokenParam && emailParam) {
-      console.log(tokenParam, emailParam);
       this.validateToken({ token: tokenParam, email: emailParam });
     } else if (nameParam && state) {
-      console.log(nameParam);
       this.setState({ isSuccessfulSignup: true });
     } else history.push("/");
   }
@@ -51,10 +50,13 @@ export class SignupEmailValidate extends PureComponent {
 
     if (!response.ok) return this.setState({ isValidated: false });
     this.setState({ isValidated: true });
+    const res = await response.json();
+
+    prepareUserEntrance(res.ttl);
     setTimeout(
       () =>
         history.push({
-          pathname: "/",
+          pathname: "/dashboard",
           search: `?successfulSignup=1`,
         }),
       5000

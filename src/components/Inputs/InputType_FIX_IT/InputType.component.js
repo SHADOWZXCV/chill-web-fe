@@ -27,7 +27,7 @@ export const InputType = (props) => {
   };
   const showErr = () => {
     const { error, errors } = props;
-    console.log(error);
+
     if (!error) return;
     const errorMessage = errors[error["type"]];
 
