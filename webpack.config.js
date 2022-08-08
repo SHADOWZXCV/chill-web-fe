@@ -51,6 +51,7 @@ module.exports = {
       Components: path.resolve(__dirname, "src/components/"),
       Style: path.resolve(__dirname, "src/style/"),
       Static: path.resolve(__dirname, "src/static/"),
+      Utils: path.resolve(__dirname, "src/utils/"),
     },
   },
 };

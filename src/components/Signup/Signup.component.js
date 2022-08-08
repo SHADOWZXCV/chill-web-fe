@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import SelectSection from "../SelectSection/SelectSection.component";
 import SignupForm from "Components/SignupForm";
@@ -23,29 +22,35 @@ class SignupComponent extends PureComponent {
     );
   }
 
-  renderSignupForm() {
+  selectSections() {
     const { handleSignup, handleSignin } = this.props;
 
+    return [
+      {
+        name: "Signup",
+        Component: SignupForm,
+        props: {
+          handleSignup,
+        },
+      },
+      {
+        name: "Signin",
+        Component: SigninForm,
+        props: {
+          handleSignin,
+        },
+      },
+    ];
+  }
+
+  renderSignupForm() {
+    // selected prop takes the index of the selected section in the array sent to sections prop.
     return (
       <div className="Form-Signup">
         <SelectSection
           separator="Or"
-          sections={[
-            {
-              name: "Signup",
-              Component: SignupForm,
-              props: {
-                handleSignup,
-              },
-            },
-            {
-              name: "Signin",
-              Component: SigninForm,
-              props: {
-                handleSignin,
-              },
-            },
-          ]}
+          sections={this.selectSections()}
+          selected={1}
         />
       </div>
     );
@@ -61,4 +66,4 @@ class SignupComponent extends PureComponent {
   }
 }
 
-export default withRouter(SignupComponent);
+export default SignupComponent;

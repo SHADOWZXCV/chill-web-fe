@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Fragment, PureComponent } from "react";
 import PropTypes from "prop-types";
 import "./SelectSection.style.scss";
 
@@ -6,11 +6,23 @@ class SelectSection extends PureComponent {
   static propTypes = {
     sections: PropTypes.array.isRequired,
     separator: PropTypes.string,
+    selected: PropTypes.number,
   };
 
   state = {
     selectedKey: 0,
   };
+
+  // A simple trick to show user sign up page if it is
+  // his first time here, otherwise it goes to sign in
+  // works only for sign in and up selection sections
+  componentDidMount() {
+    const { selected } = this.props;
+    const isFirstTime = localStorage.getItem("firstTime");
+    if (isFirstTime === "true") return localStorage.setItem("firstTime", false);
+    if (!selected) return;
+    this.selectItem(selected);
+  }
 
   selectItem(key) {
     this.setState({ selectedKey: key });
@@ -28,8 +40,9 @@ class SelectSection extends PureComponent {
     const { separator } = this.props;
     const { selectedKey } = this.state;
 
+    // usage of Fragment to be able to add a key without adding a div or any element!
     return (
-      <>
+      <Fragment key={key}>
         <div
           className="head-select-group"
           key={key}
@@ -42,10 +55,10 @@ class SelectSection extends PureComponent {
             }
           ></div>
         </div>
-        {separator && sectionsLength !== key + 1 && (
+        {separator && key !== sectionsLength - 1 && (
           <p className="head-select-separator">{separator}</p>
         )}
-      </>
+      </Fragment>
     );
   }
 
@@ -62,13 +75,13 @@ class SelectSection extends PureComponent {
     const { selectedKey } = this.state;
 
     return (
-      <>
+      <Fragment key={key}>
         {selectedKey === key ? (
           <div className="body-select-group" key={key}>
             <Component {...props} />
           </div>
         ) : null}
-      </>
+      </Fragment>
     );
   }
 
