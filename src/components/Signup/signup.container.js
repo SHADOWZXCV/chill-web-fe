@@ -17,24 +17,28 @@ class Signup extends PureComponent {
       const body = await res.json();
       return done({ status: res.status, body });
     } catch (error) {
-      return done(false);
+      return done();
     }
   }
 
   async handleSignin(data, done) {
-    const res = await fetch("http://localhost:3000/signin", {
-      method: "POST",
-      mode: "cors",
-      withCredentials: true,
-      credentials: "include",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const body = res.ok ? await res.json() : null;
+    try {
+      const res = await fetch("http://localhost:3000/signin", {
+        method: "POST",
+        mode: "cors",
+        withCredentials: true,
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const body = res.ok ? await res.json() : null;
 
-    return done({ status: res.status, body });
+      return done({ status: res.status, body });
+    } catch (e) {
+      return done();
+    }
   }
 
   containerFunctions = {

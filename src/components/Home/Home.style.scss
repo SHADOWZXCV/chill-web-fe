@@ -1,8 +1,8 @@
 @use 'Style/abstract/_mixins.scss' as *;
 
 @keyframes change_bg {
-    from {  background: url("../../static/Home/dashboard.png") no-repeat; background-size: cover; }
-    to { background: url("../../static/Home/dashboard_dark.png") no-repeat; background-size: cover; }
+    from {  background: url("Static/Home/dashboard.png") no-repeat; background-size: cover; }
+    to { background: url("Static/Home/dashboard_dark.png") no-repeat; background-size: cover; }
 }
 
 @keyframes change_margin_top {
@@ -11,7 +11,8 @@
 }
 
 hr {
-    border: solid 1px #00000016;
+    border: none;
+    border-top: solid 3px #00000016;
     width: 50%;
     margin-left: 0;
 
@@ -72,7 +73,7 @@ hr {
             margin-bottom: 2em;
 
             * {
-                margin: 1em;
+                margin: 1em 0;
                 text-decoration: none;
                 color: white;
                 padding: 1em;
@@ -140,7 +141,7 @@ hr {
         background: url("Static/Home/dashboard.png") no-repeat;
         background-size: cover;
         transition: 0.5s;
-        animation: change_bg 5s infinite alternate;
+        // animation: change_bg 5s infinite alternate;
         @include mobile {
             position: relative;
             border-radius: 20px;
@@ -149,7 +150,7 @@ hr {
 
     &-SideImage:hover {
         @include desktop{
-            width: 74%;
+            width: 75%;
             animation: change_bg 5s infinite alternate, change_margin_top 0.6s infinite alternate;
         }
     }

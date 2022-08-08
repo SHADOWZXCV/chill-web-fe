@@ -19,6 +19,7 @@ export class SigninForm extends PureComponent {
     this.setState({ isLoading: true });
     handleSignin(data, (res) => {
       this.setState({ isLoading: false });
+
       if (!res) {
         return this.setState({ noConnection: true });
       }

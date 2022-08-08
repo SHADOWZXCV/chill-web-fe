@@ -66,7 +66,7 @@ export class HomeComponent extends PureComponent {
           <p id="chill-message">Come and chill with me..</p>
         </div>
         <p className="love-message">
-          {"Made with ❤ , by a time manager, for time managers!"}
+          {"Made with ❤ , by a software developer"}
         </p>
       </>
     );
@@ -86,9 +86,7 @@ export class HomeComponent extends PureComponent {
           </h2>
           {this.renderComments()}
           {isMobile ? null : this.renderButtons()}
-          {isMobile ? null : (
-            <p>{"Made with ❤ , by a time manager, for time managers!"}</p>
-          )}
+          {isMobile ? null : <p>{"Made with ❤ , by a software developer"}</p>}
         </div>
         {isMobile ? (
           this.renderCoolImageWithLoveMessage()
