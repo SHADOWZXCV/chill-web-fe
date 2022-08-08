@@ -1,17 +1,12 @@
-/* eslint-disable react/prop-types */
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-// import InputType from "../Inputs/InputType_FIX_IT/InputType.component";
-// import SubmitButton from "../Inputs/SubmitButton/SubmitButton.component";
 
 export class SignupEmailValidate extends PureComponent {
   static propTypes = {
-    // register: PropTypes.func.isRequired,
-    // handleSubmit: PropTypes.func.isRequired,
-    // validateToken: PropTypes.func.isRequired,
     isSuccessfulSignup: PropTypes.bool.isRequired,
     isValidated: PropTypes.bool.isRequired,
-    email: PropTypes.string.isRequired,
+    state: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
   };
 
   state = {
@@ -75,8 +70,6 @@ export class SignupEmailValidate extends PureComponent {
   }
 
   render() {
-    // const { register, handleSubmit, validateToken } = this.props;
-    // const { noConnection } = this.state;
     const { isSuccessfulSignup, isValidated } = this.props;
     return (
       <div className="PerfectCenterChildren">
@@ -86,14 +79,6 @@ export class SignupEmailValidate extends PureComponent {
           ? this.renderEmailValidated()
           : this.renderNotValidated()}
       </div>
-      // <form onSubmit={handleSubmit(validateToken)}>
-      //   <InputType
-      //     name="token"
-      //     register={register}
-      //     placeholder="Enter validation code"
-      //   />
-      //   <SubmitButton value="validate" noConnection={noConnection} />
-      // </form>
     );
   }
 }

@@ -1,13 +1,12 @@
 import React, { PureComponent } from "react";
-import { withFormHook } from "../../utils/wrappers/formHook";
 import SigninFormComponent from "./SigninForm.component";
 import PropTypes from "prop-types";
-// import history from "../../utils/History";
+import { prepareUserEntrance } from "Utils/isSignedIn";
 
 export class SigninForm extends PureComponent {
   static propTypes = {
     handleSignin: PropTypes.func.isRequired,
-    setError: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
   };
 
   state = {
@@ -15,37 +14,19 @@ export class SigninForm extends PureComponent {
     noConnection: false,
   };
 
-  // (data) => {
-  //   this.setState({ isLoading: true });
-  //   handleSignin(data, (data) => {
-  //     this.setState({ isLoading: false });
-  //     switch (data.status) {
-  //       case 404:
-  //         setError(
-  //           "username",
-  //           {
-  //             type: "notFound",
-  //             message: "This user is not found, maybe a typo ?",
-  //           },
-  //           { shouldFocus: true }
-  //         );
-  //         break;
-  //     }
-  //   });
-  // })
-  onSubmit(data) {
-    const { handleSignin, setError } = this.props;
+  onSubmit(data, setError) {
+    const { handleSignin, history } = this.props;
     this.setState({ isLoading: true });
     handleSignin(data, (res) => {
       this.setState({ isLoading: false });
+
       if (!res) {
         return this.setState({ noConnection: true });
       }
-      console.log("res: ", res);
-      console.log("data: ", data);
+
       this.setState({ noConnection: false });
       switch (res.status) {
-        case 405:
+        case 404:
           setError(
             "username",
             {
@@ -55,8 +36,20 @@ export class SigninForm extends PureComponent {
             { shouldFocus: true }
           );
           break;
+        case 403:
+          setError(
+            "username",
+            {
+              type: "notValid",
+              message:
+                "This user is not valid, check your email and validate the account!",
+            },
+            { shouldFocus: true }
+          );
+          break;
         case 200:
-          console.log("signed in!");
+          prepareUserEntrance(res.body.ttl);
+          history.push("/dashboard");
           break;
       }
     });
@@ -77,4 +70,4 @@ export class SigninForm extends PureComponent {
   }
 }
 
-export default withFormHook(SigninForm);
+export default SigninForm;

@@ -4,12 +4,16 @@ import { isMobile } from "react-device-detect";
 
 import "./Home.style.scss";
 import chillGuy from "../../static/home/sun.png";
-import { withRouter } from "react-router-dom";
 
 export class HomeComponent extends PureComponent {
   static propTypes = {
     history: PropTypes.object.isRequired,
   };
+
+  componentDidMount() {
+    const isFirstTime = localStorage.getItem("firstTime");
+    if (!isFirstTime) localStorage.setItem("firstTime", true);
+  }
 
   renderNav() {
     return (
@@ -62,7 +66,7 @@ export class HomeComponent extends PureComponent {
           <p id="chill-message">Come and chill with me..</p>
         </div>
         <p className="love-message">
-          {"Made with ❤ , by a time manager, for time managers!"}
+          {"Made with ❤ , by a software developer"}
         </p>
       </>
     );
@@ -82,9 +86,7 @@ export class HomeComponent extends PureComponent {
           </h2>
           {this.renderComments()}
           {isMobile ? null : this.renderButtons()}
-          {isMobile ? null : (
-            <p>{"Made with ❤ , by a time manager, for time managers!"}</p>
-          )}
+          {isMobile ? null : <p>{"Made with ❤ , by a software developer"}</p>}
         </div>
         {isMobile ? (
           this.renderCoolImageWithLoveMessage()
@@ -96,4 +98,4 @@ export class HomeComponent extends PureComponent {
   }
 }
 
-export default withRouter(HomeComponent);
+export default HomeComponent;

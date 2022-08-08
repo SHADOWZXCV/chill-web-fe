@@ -64,7 +64,7 @@ export class SigninForm extends PureComponent {
               : type === "maxLength"
               ? `Username
                 should be at 29 characters max!`
-              : type === "notFound"
+              : type === "notFound" || type === "notValid"
               ? message
               : null}
           </p>
@@ -82,12 +82,16 @@ export class SigninForm extends PureComponent {
       getValues,
       isLoading,
       noConnection,
+      setError,
     } = this.props;
 
     const { passwordShown } = this.state;
 
     return (
-      <form id="signin-form" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        id="signin-form"
+        onSubmit={handleSubmit((data) => onSubmit(data, setError))}
+      >
         <Loading isLoading={isLoading} />
         <div className="input-group">
           <input

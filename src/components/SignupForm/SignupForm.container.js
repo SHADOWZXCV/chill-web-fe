@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { withFormHook } from "../../utils/wrappers/formHook";
 import SignupFormComponent from "./SignupForm.component";
 import PropTypes from "prop-types";
-import history from "../../utils/History";
 
 export class SignupForm extends PureComponent {
   static propTypes = {
@@ -23,8 +22,6 @@ export class SignupForm extends PureComponent {
       if (!res) {
         return this.setState({ noConnection: true });
       }
-      console.log("res: ", res);
-      console.log("data: ", data);
       this.setState({ noConnection: false });
       switch (res.status) {
         case 405:

@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import { withRouter } from "react-router-dom";
 import SignupComponent from "./Signup.component";
 
 class Signup extends PureComponent {
@@ -18,7 +17,7 @@ class Signup extends PureComponent {
       const body = await res.json();
       return done({ status: res.status, body });
     } catch (error) {
-      return done(false);
+      return done();
     }
   }
 
@@ -34,13 +33,11 @@ class Signup extends PureComponent {
         },
         body: JSON.stringify(data),
       });
+      const body = res.ok ? await res.json() : null;
 
-      const body = await res.json();
-
-      console.log(body);
       return done({ status: res.status, body });
-    } catch (error) {
-      return done(false);
+    } catch (e) {
+      return done();
     }
   }
 
@@ -52,6 +49,7 @@ class Signup extends PureComponent {
   containerProps = {
     ...this.state,
     ...this.containerFunctions,
+    ...this.props,
   };
 
   render() {
@@ -59,4 +57,4 @@ class Signup extends PureComponent {
   }
 }
 
-export default withRouter(Signup);
+export default Signup;
