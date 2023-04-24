@@ -1,0 +1,17 @@
+@use 'Style/abstract/mixins' as *;
+@use 'Style/abstract/abstract' as *;
+
+.theme-container {
+    &-dark {
+        @include theme($dark-theme);
+    }
+
+    &-light {
+        @include theme($light-theme);
+    }
+
+    padding: 30px 50px;
+    height: 100%;
+}
+
+

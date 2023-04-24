@@ -15,7 +15,7 @@ export class SignupForm extends PureComponent {
   };
 
   onSubmit(data) {
-    const { handleSignup, setError } = this.props;
+    const { handleSignup, setError, navigate } = this.props;
     this.setState({ isLoading: true });
     handleSignup(data, (res) => {
       this.setState({ isLoading: false });
@@ -35,7 +35,7 @@ export class SignupForm extends PureComponent {
           );
           break;
         case 200:
-          history.push({
+          navigate({
             pathname: `/enter/validate`,
             search: `?username=${data.username}`,
             state: { signupContext: { email: res.body.email } },

@@ -3,14 +3,17 @@ import PropTypes from "prop-types";
 import { isMobile } from "react-device-detect";
 
 import "./Home.style.scss";
-import chillGuy from "../../static/home/sun.png";
+import chillGuy from "Static/home/sun.png";
+import Themable from "Components/Themable";
 
 export class HomeComponent extends PureComponent {
   static propTypes = {
-    history: PropTypes.object.isRequired,
+    navigate: PropTypes.func,
   };
 
   componentDidMount() {
+    // first time item is responsible for determining what to show for users
+    // that are here for the first time, for example: signup page instead of signin page.
     const isFirstTime = localStorage.getItem("firstTime");
     if (!isFirstTime) localStorage.setItem("firstTime", true);
   }
@@ -24,7 +27,7 @@ export class HomeComponent extends PureComponent {
     );
   }
 
-  renderComments() {
+  renderDescriptionAndReviews() {
     return (
       <div className="Content">
         <p>
@@ -44,11 +47,11 @@ export class HomeComponent extends PureComponent {
   }
 
   renderButtons() {
-    const { history } = this.props;
+    const { navigate } = this.props;
 
     return (
       <div className="Home-content-btns">
-        <a onClick={() => history.push("/enter")} id="try-out-btn">
+        <a onClick={() => navigate("/enter")} id="try-out-btn">
           TRY IT OUT
         </a>
         <a href="#" id="features-btn">
@@ -60,40 +63,58 @@ export class HomeComponent extends PureComponent {
 
   renderCoolImageWithLoveMessage() {
     return (
-      <>
-        <div id="chill-gang">
-          <img id="chillGuy" src={chillGuy} />
-          <p id="chill-message">Come and chill with me..</p>
-        </div>
+      <div id="chill-gang">
+        <img id="chillGuy" src={chillGuy} />
+        <p id="chill-message">Come and chill with me..</p>
         <p className="love-message">
           {"Made with ❤ , by a software developer"}
         </p>
-      </>
+      </div>
     );
   }
 
+  /**
+   * render function
+   * @returns Home page component view.
+   * Difference between isMobile variable, the "_isMobileOrTablet" modifier & the mixin: "mobile":
+   * - isMobile distinguishes between Desktop & any other mobile-form device ( phone, tablet, etc )
+   * - "_isMobileOrTablet" is the same, but I use it to tunnel the "isMobile" variable to Sass.
+   * - the "mobile" mixin is made for sizes smaller than 810px in width,
+   *   use it to distinguish between mobiles and tablets.
+   */
   render() {
     return (
-      <div className="Home Home-Main">
-        <div className="Home Home-Nav">
-          {isMobile ? this.renderNav() : null}
+      <Themable>
+        <div className={`Home Home-Main${isMobile ? "_isMobileOrTablet" : ""}`}>
+          {isMobile ? (
+            <div className="Home Home-Nav">{this.renderNav()}</div>
+          ) : null}
+          <div className="Home Home-content">
+            {!isMobile ? <h1>Chill,</h1> : null}
+            <h2>
+              Meet your futuristic life manager,{" "}
+              <span id="bold-span">all in one!</span>
+            </h2>
+            {this.renderDescriptionAndReviews()}
+            {!isMobile ? (
+              <>
+                {this.renderButtons()}
+                <p>
+                  {
+                    "Made with ❤ , by a software developer ( Psst.. press F10 for a surprise :) )"
+                  }
+                </p>
+              </>
+            ) : null}
+          </div>
+          {isMobile ? (
+            this.renderCoolImageWithLoveMessage()
+          ) : (
+            // Using a div instead of img to handle hovering action and image changing solely in sass.
+            <div className="Home Home-SideImage"></div>
+          )}
         </div>
-        <div className="Home Home-content">
-          {isMobile ? null : <h1>Chill,</h1>}
-          <h2>
-            Meet your futuristic life manager,{" "}
-            <span id="bold-span">all in one!</span>
-          </h2>
-          {this.renderComments()}
-          {isMobile ? null : this.renderButtons()}
-          {isMobile ? null : <p>{"Made with ❤ , by a software developer"}</p>}
-        </div>
-        {isMobile ? (
-          this.renderCoolImageWithLoveMessage()
-        ) : (
-          <div className="Home Home-SideImage"></div>
-        )}
-      </div>
+      </Themable>
     );
   }
 }

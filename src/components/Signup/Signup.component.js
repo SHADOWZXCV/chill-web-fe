@@ -8,16 +8,16 @@ import "./Signup.style.scss";
 
 class SignupComponent extends PureComponent {
   static propTypes = {
-    history: PropTypes.object.isRequired,
+    navigate: PropTypes.func,
     handleSignup: PropTypes.func.isRequired,
     handleSignin: PropTypes.func.isRequired,
   };
 
   renderNav() {
-    const { history } = this.props;
+    const { navigate } = this.props;
     return (
       <div className="Nav-Signup">
-        <h2 onClick={() => history.push("/")}>chill</h2>
+        <h2 onClick={() => navigate("/")}>Chill</h2>
       </div>
     );
   }

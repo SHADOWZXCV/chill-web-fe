@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const path = require("path");
 const htmlWebpack = require("html-webpack-plugin");
 
@@ -24,16 +25,12 @@ module.exports = {
           "css-loader",
           {
             loader: "sass-loader",
-            // loads lines with each sass file loaded:
-            // options: {
-            //   additionalData: '@use "Style/_main.scss" as *;',
-            // },
           },
         ],
       },
       {
-        test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg|webp)(\?[a-z0-9=.]+)?$/,
-        loader: "url-loader",
+        test: /\.(jpe?g|png|gif|woff(2)?|eot|ttf|svg|webp)(\?[a-z0-9=.]+)?$/,
+        type: "asset/resource",
       },
     ],
   },
@@ -43,6 +40,7 @@ module.exports = {
   plugins: [
     new htmlWebpack({
       template: path.resolve(__dirname, "views/index.html"),
+      favicon: "./chill.ico",
     }),
   ],
   devtool: "eval-source-map",
@@ -52,6 +50,7 @@ module.exports = {
       Style: path.resolve(__dirname, "src/style/"),
       Static: path.resolve(__dirname, "src/static/"),
       Utils: path.resolve(__dirname, "src/utils/"),
+      Store: path.resolve(__dirname, "src/store"),
     },
   },
 };

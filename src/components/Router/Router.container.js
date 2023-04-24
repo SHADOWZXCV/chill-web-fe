@@ -1,19 +1,13 @@
-import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 import RouterComponent from "./Router.component";
 
 import RoutesList from "../../routes/RoutesList/RoutesList";
-import { Router } from "react-router-dom";
-import history from "Utils/History";
+import { BrowserRouter as Router } from "react-router-dom";
 
 export class RouterContainer extends PureComponent {
-  static propTypes = {
-    path: PropTypes.string.isRequired,
-  };
-
   render() {
     return (
-      <Router history={history}>
+      <Router>
         <RouterComponent RouteComponentList={RoutesList} />
       </Router>
     );

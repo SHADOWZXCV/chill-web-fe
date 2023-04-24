@@ -8,7 +8,7 @@ import Loading from "Components/Loading/Loading.component";
 export class SignupEmailValidate extends PureComponent {
   static propTypes = {
     location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
+    navigate: PropTypes.func,
   };
 
   state = {
@@ -18,7 +18,7 @@ export class SignupEmailValidate extends PureComponent {
 
   componentDidMount() {
     const {
-      history,
+      navigate,
       location,
       location: { state },
     } = this.props;
@@ -30,11 +30,11 @@ export class SignupEmailValidate extends PureComponent {
       this.validateToken({ token: tokenParam, email: emailParam });
     } else if (nameParam && state) {
       this.setState({ isSuccessfulSignup: true });
-    } else history.push("/");
+    } else navigate("/");
   }
 
   async validateToken(data) {
-    const { history } = this.props;
+    const { navigate } = this.props;
     const { token, email } = data;
 
     const response = await fetch("http://localhost:3000/signup/validate", {
@@ -55,7 +55,7 @@ export class SignupEmailValidate extends PureComponent {
     prepareUserEntrance(res.ttl);
     setTimeout(
       () =>
-        history.push({
+        navigate({
           pathname: "/dashboard",
           search: `?successfulSignup=1`,
         }),

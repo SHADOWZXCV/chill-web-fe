@@ -6,11 +6,11 @@ import "./Loading.style.scss";
 
 export class Loading extends PureComponent {
   static propTypes = {
-    isLoading: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool,
   };
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading = true } = this.props;
     if (isLoading)
       return (
         <div id="loading-icon-container">
