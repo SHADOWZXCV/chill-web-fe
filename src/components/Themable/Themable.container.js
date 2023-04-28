@@ -23,13 +23,10 @@ export class Themable extends PureComponent {
 
   containerFunctions = {};
 
-  containerProps = {
-    ...this.props,
-    ...this.containerFunctions,
-  };
+  containerProps = {};
 
   render() {
-    return <ThemableComponent {...this.containerProps} />;
+    return <ThemableComponent {...this.props} {...this.containerFunctions} />;
   }
 }
 
