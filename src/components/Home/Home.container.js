@@ -29,7 +29,7 @@ export class Home extends PureComponent {
     if (ev.key !== "F10") return;
     ev.preventDefault();
     ev.stopImmediatePropagation();
-    console.log("theme changed");
+
     switchTheme(document.theme === "light" ? "dark" : "light");
     document.theme = document.theme === "light" ? "dark" : "light";
   }

@@ -6,38 +6,39 @@ import SigninForm from "../SigninForm";
 
 import "./Signup.style.scss";
 
-class SignupComponent extends PureComponent {
+class EnterAccountComponent extends PureComponent {
   static propTypes = {
     navigate: PropTypes.func,
-    handleSignup: PropTypes.func.isRequired,
-    handleSignin: PropTypes.func.isRequired,
+    handleSign: PropTypes.func.isRequired,
   };
 
   renderNav() {
     const { navigate } = this.props;
     return (
       <div className="Nav-Signup">
-        <h2 onClick={() => navigate("/")}>Chill</h2>
+        <h2 onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+          Chill
+        </h2>
       </div>
     );
   }
 
-  selectSections() {
-    const { handleSignup, handleSignin } = this.props;
+  getSections() {
+    const { handleSign } = this.props;
 
     return [
       {
         name: "Signup",
         Component: SignupForm,
         props: {
-          handleSignup,
+          handleSignup: (data, done) => handleSign("signup", data, done),
         },
       },
       {
         name: "Signin",
         Component: SigninForm,
         props: {
-          handleSignin,
+          handleSignin: (data, done) => handleSign("signin", data, done),
         },
       },
     ];
@@ -47,11 +48,7 @@ class SignupComponent extends PureComponent {
     // selected prop takes the index of the selected section in the array sent to sections prop.
     return (
       <div className="Form-Signup">
-        <SelectSection
-          separator="Or"
-          sections={this.selectSections()}
-          selected={1}
-        />
+        <SelectSection separator="Or" sections={this.getSections()} />
       </div>
     );
   }
@@ -66,4 +63,4 @@ class SignupComponent extends PureComponent {
   }
 }
 
-export default SignupComponent;
+export default EnterAccountComponent;

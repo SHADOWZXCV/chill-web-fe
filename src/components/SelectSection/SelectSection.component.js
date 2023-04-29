@@ -13,30 +13,19 @@ class SelectSection extends PureComponent {
     selectedKey: 0,
   };
 
-  // A simple trick to show user sign up page if it is
-  // his first time here, otherwise it goes to sign in
-  // works only for sign in and up selection sections
-  componentDidMount() {
-    const { selected } = this.props;
-    const isFirstTime = localStorage.getItem("firstTime");
-    if (isFirstTime === "true") return localStorage.setItem("firstTime", false);
-    if (!selected) return;
-    this.selectItem(selected);
-  }
-
-  selectItem(key) {
+  selectSection(key) {
     this.setState({ selectedKey: key });
   }
 
-  renderSelectItems() {
+  renderSelectHeadSections() {
     const { sections } = this.props;
 
     return sections.map((section, indx) =>
-      this.renderSelectItem(section.name, indx, sections.length)
+      this.renderSelectHeadSection(section.name, indx, sections.length)
     );
   }
 
-  renderSelectItem(name, key, sectionsLength) {
+  renderSelectHeadSection(name, key, sectionsLength) {
     const { separator } = this.props;
     const { selectedKey } = this.state;
 
@@ -46,7 +35,7 @@ class SelectSection extends PureComponent {
         <div
           className="head-select-group"
           key={key}
-          onClick={() => this.selectItem(key)}
+          onClick={() => this.selectSection(key)}
         >
           <h1 className="head-select-item">{name}</h1>
           <div
@@ -62,15 +51,15 @@ class SelectSection extends PureComponent {
     );
   }
 
-  renderSelectBodyItems() {
+  renderSelectBodySections() {
     const { sections } = this.props;
 
     return sections.map((section, indx) =>
-      this.renderSelectBodyItem(section, indx)
+      this.renderSelectBodySection(section, indx)
     );
   }
 
-  renderSelectBodyItem(section, key) {
+  renderSelectBodySection(section, key) {
     const { Component, props } = section;
     const { selectedKey } = this.state;
 
@@ -88,8 +77,8 @@ class SelectSection extends PureComponent {
   render() {
     return (
       <div id="select">
-        <div id="head-select">{this.renderSelectItems()}</div>
-        <div id="body-select">{this.renderSelectBodyItems()}</div>
+        <div id="head-select">{this.renderSelectHeadSections()}</div>
+        <div id="body-select">{this.renderSelectBodySections()}</div>
       </div>
     );
   }

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { PureComponent, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Loading from "Components/Loading/Loading.component";
-import withRouter from "Utils/History";
+import withRouter from "Utils/wrappers/react-router/history";
 import ProtectedRouteHOC from "Utils/ProtectedRoute";
 
 export class RouterComponent extends PureComponent {
