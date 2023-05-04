@@ -38,7 +38,7 @@ export class SignupEmailValidate extends PureComponent {
   renderSuccessfulSignup() {
     return (
       <>
-        <h1>Your email verification is on its way!</h1>
+        <h1>A message is on its way to you email!</h1>
         <p>
           Check out your email&apos;s inbox, click the link to verify the email
           address: {this.renderPartialMail()}

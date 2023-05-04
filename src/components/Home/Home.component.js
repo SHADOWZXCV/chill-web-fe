@@ -11,13 +11,6 @@ export class HomeComponent extends PureComponent {
     navigate: PropTypes.func,
   };
 
-  componentDidMount() {
-    // first time item is responsible for determining what to show for users
-    // that are here for the first time, for example: signup page instead of signin page.
-    const isFirstTime = localStorage.getItem("firstTime");
-    if (!isFirstTime) localStorage.setItem("firstTime", true);
-  }
-
   renderNav() {
     return (
       <div className="Nav">

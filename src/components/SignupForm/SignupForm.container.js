@@ -1,12 +1,14 @@
 import React, { PureComponent } from "react";
-import { withFormHook } from "../../utils/wrappers/formHook";
-import SignupFormComponent from "./SignupForm.component";
 import PropTypes from "prop-types";
+import { withFormHook } from "Utils/wrappers/formHook";
+import withRouter from "Utils/wrappers/react-router/history";
+import SignupFormComponent from "./SignupForm.component";
 
 export class SignupForm extends PureComponent {
   static propTypes = {
     handleSignup: PropTypes.func.isRequired,
     setError: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired,
   };
 
   state = {
@@ -14,33 +16,33 @@ export class SignupForm extends PureComponent {
     noConnection: false,
   };
 
+  handleBasedOnStatCode(res, data) {
+    const { setError, navigate } = this.props;
+    const { status } = res;
+
+    return {
+      405: () => setError("email", res.body.errors, { shouldFocus: true }),
+      200: () =>
+        navigate(`/enter/validate?username=${data.username}`, {
+          state: { signupContext: { email: data.email } },
+        }),
+    }[status]();
+  }
+
   onSubmit(data) {
-    const { handleSignup, setError, navigate } = this.props;
+    const { handleSignup } = this.props;
     this.setState({ isLoading: true });
-    handleSignup(data, (res) => {
+    handleSignup(data, (res, error) => {
       this.setState({ isLoading: false });
+
       if (!res) {
+        console.error(error);
         return this.setState({ noConnection: true });
       }
+      // to remove the prev try "no connection" state.
       this.setState({ noConnection: false });
-      switch (res.status) {
-        case 405:
-          setError(
-            "email",
-            {
-              type: "exists",
-              message: res.body.error,
-            },
-            { shouldFocus: true }
-          );
-          break;
-        case 200:
-          navigate({
-            pathname: `/enter/validate`,
-            search: `?username=${data.username}`,
-            state: { signupContext: { email: res.body.email } },
-          });
-      }
+
+      return this.handleBasedOnStatCode(res, data);
     });
   }
 
@@ -59,4 +61,4 @@ export class SignupForm extends PureComponent {
   }
 }
 
-export default withFormHook(SignupForm);
+export default withRouter(withFormHook(SignupForm));
