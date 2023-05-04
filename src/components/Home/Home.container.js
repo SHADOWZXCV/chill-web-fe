@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
-import HomeComponent from "./Home.component";
 import { connect } from "react-redux";
-import changeTheme from "Store/DarkMode/DarkMode.action";
 import { PropTypes } from "prop-types";
+import changeTheme from "Store/DarkMode/DarkMode.action";
+import HomeComponent from "./Home.component";
 
 const mapDispatchToProps = (dispatch) => ({
-  changeTheme: (theme) => dispatch(changeTheme(theme)),
+  switchTheme: (theme) => dispatch(changeTheme(theme)),
 });
 
 const mapStateToProps = (state) => ({
@@ -14,31 +14,44 @@ const mapStateToProps = (state) => ({
 
 export class Home extends PureComponent {
   static propTypes = {
-    changeTheme: PropTypes.func,
+    switchTheme: PropTypes.func,
     theme: PropTypes.string,
   };
 
-  componentDidMount() {
-    const { changeTheme, theme } = this.props;
-    document.theme = theme;
-    document.addEventListener("keydown", (ev) => {
-      if (ev.key !== "F10") return;
-      ev.preventDefault();
+  constructor(props) {
+    super(props);
+    this.switchHomeTheme = this.switchHomeTheme.bind(this);
+  }
 
-      changeTheme(document.theme === "light" ? "dark" : "light");
-      document.theme = document.theme === "light" ? "dark" : "light";
-    });
+  switchHomeTheme(ev) {
+    const { switchTheme } = this.props;
+
+    if (ev.key !== "F10") return;
+    ev.preventDefault();
+    ev.stopImmediatePropagation();
+
+    switchTheme(document.theme === "light" ? "dark" : "light");
+    document.theme = document.theme === "light" ? "dark" : "light";
+  }
+
+  componentDidMount() {
+    const { theme } = this.props;
+    document.theme = theme;
+    document.addEventListener("keydown", this.switchHomeTheme);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.switchHomeTheme);
   }
 
   containerFunctions = {};
 
   containerProps = {
-    ...this.props,
     ...this.containerFunctions,
   };
 
   render() {
-    return <HomeComponent {...this.containerProps} />;
+    return <HomeComponent {...this.props} {...this.containerProps} />;
   }
 }
 

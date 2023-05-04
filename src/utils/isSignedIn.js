@@ -13,6 +13,8 @@ export const prepareUserEntrance = (ttl) => {
       expiry: Number(ttl),
     })
   );
+  console.log("hey, here!");
+  console.log(localStorage.getItem("isSignedIn"));
 };
 
 export default isSignedIn;

@@ -1,3 +1,3 @@
-import { SigninForm } from "./SigninForm.container";
+import SigninForm from "./SigninForm.container";
 
 export default SigninForm;

@@ -37,7 +37,6 @@ export class Gears extends PureComponent {
               height="2rem"
               viewBox="0 0 33.31 26.525"
               onClick={() => {
-                console.log(editView);
                 changeEditView(!editView);
               }}
             >
