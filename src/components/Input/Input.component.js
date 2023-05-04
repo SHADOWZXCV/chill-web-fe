@@ -20,6 +20,7 @@ export class InputComponent extends PureComponent {
     rules: PropTypes.object,
     placeholder: PropTypes.string.isRequired,
     required: PropTypes.bool,
+    isThemed: PropTypes.bool,
   };
 
   state = {
@@ -69,7 +70,7 @@ export class InputComponent extends PureComponent {
       id,
       getValues,
       specialIcon,
-      specialIcon: { IconOff, IconOn, size } = {},
+      specialIcon: { IconOff, IconOn, size, isAlwaysShown } = {},
       name,
     } = this.props;
     const { stateOfIcon } = this.state;
@@ -85,7 +86,9 @@ export class InputComponent extends PureComponent {
           });
         }}
       >
-        {stateOfIcon && getValues()[name] ? (
+        {isAlwaysShown ? (
+          <IconOn size={size} />
+        ) : stateOfIcon && getValues()[name] ? (
           <IconOff size={size} />
         ) : !stateOfIcon && getValues()[name] ? (
           <IconOn size={size} />
@@ -105,6 +108,7 @@ export class InputComponent extends PureComponent {
       placeholder,
       required,
       specialTypeWithIcon,
+      isThemed,
     } = this.props;
     const { stateOfIcon } = this.state;
 
@@ -115,13 +119,18 @@ export class InputComponent extends PureComponent {
           className={errors[name] ? "Input-Signup-error" : "Input-Signup"}
           name={name}
           id={id}
+          // this placeholder is for styling purposes
           placeholder="  "
           {...register(name, rules)}
           required={required}
           onFocus={() => this.setState({ focused: true })}
           onBlur={() => this.setState({ focused: false })}
         />
-        <span className="floating-ph">{placeholder}</span>
+        <span
+          className={`floating-ph${isThemed ? " floating-ph_isThemed" : ""}`}
+        >
+          {placeholder}
+        </span>
         {this.renderSpecialIcon()}
         {this.showErr()}
       </div>

@@ -1,6 +1,6 @@
 @use 'Style/abstract/_abstract.scss' as *;
 
-.Input-Signup:focus + .floating-ph{
+.Input-Signup:focus + .floating-ph {
     color: #3E8EDC;
     top: 16px;
     font-size: 8px;
@@ -18,7 +18,7 @@
     outline: none;
 }
 
-.Input-Signup-error:focus + .floating-ph{
+.Input-Signup-error:focus + .floating-ph {
     color: $error-color;
     top: 16px;
     font-size: 8px;
@@ -58,7 +58,7 @@
 
 [id$="-icon"] {
     position: absolute;
-    top: 23px;
+    top: 27px;
     right: 35px;
     cursor: pointer;
 }
@@ -69,7 +69,11 @@
     left: 18px;
     color: $dark-block-color-300;
     font-size: 13px;
-    z-index: -1;
+    z-index: 1;
     transition: 0.2s ease;
     user-select: none;
+
+    &_isThemed {
+        color: $block-color-300;
+    }
 }

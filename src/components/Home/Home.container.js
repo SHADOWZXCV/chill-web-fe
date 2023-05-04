@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
-import HomeComponent from "./Home.component";
 import { connect } from "react-redux";
-import changeTheme from "Store/DarkMode/DarkMode.action";
 import { PropTypes } from "prop-types";
+import changeTheme from "Store/DarkMode/DarkMode.action";
+import HomeComponent from "./Home.component";
 
 const mapDispatchToProps = (dispatch) => ({
   switchTheme: (theme) => dispatch(changeTheme(theme)),
