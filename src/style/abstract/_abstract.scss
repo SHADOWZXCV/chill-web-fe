@@ -2,9 +2,29 @@ $primary-color: #3E8EDC;
 $error-color: #D9353A;
 
 $background-color: #F5F5F5;
+$background-color-300: #d3d3d3;
 $primary-text-color: #000000;
 $block-color: #FFFFFF;
+$block-color-300: #ffffff72;
 
 $dark-background-color: #273139;
+$dark-background-color-300: #3d4d5b;
 $primary-dark-text-color: #DDDADF;
 $dark-block-color: #414950;
+$dark-block-color-300: #31343793;
+
+$light-theme: (
+    bg: $background-color,
+    text: $primary-text-color,
+    block-color: $block-color,
+    block-color-300: $block-color-300,
+    drag-context-bg: $background-color-300
+);
+
+$dark-theme: (
+    bg: $dark-background-color,
+    text: $primary-dark-text-color,
+    block-color: $dark-block-color,
+    block-color-300: $dark-block-color-300,
+    drag-context-bg: $dark-background-color-300
+);

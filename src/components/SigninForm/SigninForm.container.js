@@ -2,11 +2,12 @@ import React, { PureComponent } from "react";
 import SigninFormComponent from "./SigninForm.component";
 import PropTypes from "prop-types";
 import { prepareUserEntrance } from "Utils/isSignedIn";
+import withRouter from "../../utils/History";
 
 export class SigninForm extends PureComponent {
   static propTypes = {
     handleSignin: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
+    navigate: PropTypes.func.isRequired,
   };
 
   state = {
@@ -15,7 +16,7 @@ export class SigninForm extends PureComponent {
   };
 
   onSubmit(data, setError) {
-    const { handleSignin, history } = this.props;
+    const { handleSignin, navigate } = this.props;
     this.setState({ isLoading: true });
     handleSignin(data, (res) => {
       this.setState({ isLoading: false });
@@ -49,7 +50,7 @@ export class SigninForm extends PureComponent {
           break;
         case 200:
           prepareUserEntrance(res.body.ttl);
-          history.push("/dashboard");
+          navigate("/dashboard");
           break;
       }
     });
@@ -70,4 +71,4 @@ export class SigninForm extends PureComponent {
   }
 }
 
-export default SigninForm;
+export default withRouter(SigninForm);

@@ -16,3 +16,29 @@
 @mixin desktop {
     @media (min-width: 810px) { @content; }
 }
+
+@mixin theme($theme){
+    background: map-get($theme, bg);
+
+    & * {
+        color: map-get($theme, text);
+    }
+
+    & .Block {
+        background: map-get($theme, block-color);
+        &_isBlockFacade{
+            background: map-get($theme, block-color-300);
+        }
+    }
+
+    .drag-context {
+        &_isMouseOn {
+            background-color: map-get($theme, drag-context-bg);
+        }
+    }
+
+    & .Block * {
+        margin: 10px;
+    }
+
+}

@@ -1,0 +1,12 @@
+.drag-context {
+    &, &_isMouseOn {
+        padding: 1em;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: repeat(7,1fr);
+        min-height: 0;
+        flex-grow: 1;
+        column-gap: 2em;
+        row-gap: 1em;
+    }
+}

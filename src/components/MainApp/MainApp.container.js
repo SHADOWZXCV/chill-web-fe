@@ -2,14 +2,20 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isSignedIn from "Utils/isSignedIn";
 import MainAppComponent from "./MainApp.component";
+import getBlocks from "../../query/Blocks/Blocks.query";
 
 export class MainApp extends PureComponent {
   static propTypes = {
-    history: PropTypes.object.isRequired,
+    navigate: PropTypes.func,
   };
 
-  async setViewData() {
-    return false;
+  state = {
+    blocks: [],
+  };
+
+  // get from server the view object
+  setViewData() {
+    return this.setState({ blocks: getBlocks() });
   }
 
   // Expected data to get from BE:
@@ -21,19 +27,20 @@ export class MainApp extends PureComponent {
    * if not workspace present, render default view which is a blank page with a message in the middle!
    */
   componentDidMount() {
-    const { history } = this.props;
-    if (!isSignedIn()) return history.push("/enter");
+    const { navigate } = this.props;
+    if (!isSignedIn()) return navigate("/enter");
     this.setViewData();
   }
 
   containerFunctions = {};
+
   containerProps = {
     ...this.props,
     ...this.containerFunctions,
   };
 
   render() {
-    return <MainAppComponent {...this.containerProps} />;
+    return <MainAppComponent {...this.containerProps} {...this.state} />;
   }
 }
 

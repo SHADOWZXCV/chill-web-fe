@@ -1,0 +1,38 @@
+@use 'Style/abstract/_abstract.scss' as *;
+@keyframes vibrate {
+    from { transform: scale(1) rotate(0.15deg); }
+    to { transform: scale(0.995) rotate(0deg); }
+}
+
+.Block {
+    border-radius: 10px;
+    width: fit-content;
+    box-shadow: 0 0 10px #00000016;
+    // padding: 15px;
+    position: relative;
+    &, &_isBlockFacade {
+        width: 100%;
+    }
+
+}
+
+.Draggable {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 3em 1fr;
+    flex-grow: 1;
+    min-height: 0;
+
+    &_isVibrating {
+        animation: vibrate 0.3s infinite alternate;
+    }
+    &_isOnDragMode * {
+        pointer-events: none;
+    }
+}
+
+// .DragCase {
+//     width: 100%;
+//     height: 100%;
+//     position: absolute;
+// }
